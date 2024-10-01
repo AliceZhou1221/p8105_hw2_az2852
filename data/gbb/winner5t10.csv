@@ -1,0 +1,61 @@
+series,episode,baker,technical,result,baker_age,baker_occupation,hometown
+5,1,Nancy,1,STAR BAKER,60,Retired Practice Manager,"Barton-upon-Humber, Lincolnshire"
+5,2,Richard,1,STAR BAKER,38,Builder,"Mill Hill, London"
+5,3,Luis,2,STAR BAKER,42,Graphic Designer,"Poynton, Cheshire"
+5,4,Richard,5,STAR BAKER,38,Builder,"Mill Hill, London"
+5,5,Kate,3,STAR BAKER,41,Furniture Restorer,"Brighton, East Sussex"
+5,6,Chetna,2,STAR BAKER,35,Fashion Designer,"Broadstairs, Kent"
+5,7,Richard,1,STAR BAKER,38,Builder,"Mill Hill, London"
+5,8,Richard,4,STAR BAKER,38,Builder,"Mill Hill, London"
+5,9,Richard,2,STAR BAKER,38,Builder,"Mill Hill, London"
+5,10,Nancy,1,WINNER,60,Retired Practice Manager,"Barton-upon-Humber, Lincolnshire"
+6,1,Marie,3,STAR BAKER,66,Retired,"Auchterarder, Perthshire"
+6,2,Ian,3,STAR BAKER,41,Travel photographer,"Great Wilbraham, Cambridgeshire"
+6,3,Ian,1,STAR BAKER,41,Travel photographer,"Great Wilbraham, Cambridgeshire"
+6,4,Ian,4,STAR BAKER,41,Travel photographer,"Great Wilbraham, Cambridgeshire"
+6,5,Nadiya,1,STAR BAKER,30,Full-time mother,Leeds / Luton
+6,6,Mat,1,STAR BAKER,37,Fire fighter,London
+6,7,Tamal,3,STAR BAKER,29,Trainee anaesthetist,Manchester
+6,8,Nadiya,1,STAR BAKER,30,Full-time mother,Leeds / Luton
+6,9,Nadiya,4,STAR BAKER,30,Full-time mother,Leeds / Luton
+6,10,Nadiya,1,WINNER,30,Full-time mother,Leeds / Luton
+7,1,Jane,7,STAR BAKER,61,Garden designer,Beckenham
+7,2,Candice,8,STAR BAKER,31,PE teacher,"Barton-Le-Clay, Bedfordshire"
+7,3,Tom,4,STAR BAKER,26,Project engagement manager,Rochdale
+7,4,Benjamina,1,STAR BAKER,23,Teaching assistant,South London
+7,5,Candice,2,STAR BAKER,31,PE teacher,"Barton-Le-Clay, Bedfordshire"
+7,6,Tom,1,STAR BAKER,26,Project engagement manager,Rochdale
+7,7,Andrew,1,STAR BAKER,25,Aerospace engineer,"Derby / Holywood, County Down"
+7,8,Candice,1,STAR BAKER,31,PE teacher,"Barton-Le-Clay, Bedfordshire"
+7,9,Andrew,2,STAR BAKER,25,Aerospace engineer,"Derby / Holywood, County Down"
+7,10,Candice,2,WINNER,31,PE teacher,"Barton-Le-Clay, Bedfordshire"
+8,1,Steven,6,STAR BAKER,34,Marketer,"Watford, Hertfordshire"
+8,2,Steven,6,STAR BAKER,34,Marketer,"Watford, Hertfordshire"
+8,3,Julia,2,STAR BAKER,21,Aviation Broker,"Crawley, West Sussex"
+8,4,Kate,6,STAR BAKER,29,Health and safety inspector,Merseyside
+8,5,Sophie,1,STAR BAKER,33,Former army officer and trainee stuntwoman,"West Molesey, Surrey"
+8,6,Liam,4,STAR BAKER,19,Student,North London
+8,7,Steven,1,STAR BAKER,34,Marketer,"Watford, Hertfordshire"
+8,8,Stacey,3,STAR BAKER,42,Former school teacher,"Radlett, Hertfordshire"
+8,9,Sophie,1,STAR BAKER,33,Former army officer and trainee stuntwoman,"West Molesey, Surrey"
+8,10,Sophie,2,WINNER,33,Former army officer and trainee stuntwoman,"West Molesey, Surrey"
+9,1,Manon,3,STAR BAKER,26,Software project manager,London
+9,2,Rahul,2,STAR BAKER,30,Research scientist,Rotherham
+9,3,Rahul,4,STAR BAKER,30,Research scientist,Rotherham
+9,4,Dan,1,STAR BAKER,36,Full-time parent,London
+9,5,Kim-Joy,4,STAR BAKER,27,Mental health specialist,Leeds
+9,6,Briony,1,STAR BAKER,33,Full-time parent,Bristol
+9,7,Kim-Joy,6,STAR BAKER,27,Mental health specialist,Leeds
+9,8,Ruby,3,STAR BAKER,29,Project manager,London
+9,9,Ruby,1,STAR BAKER,29,Project manager,London
+9,10,Rahul,2,WINNER,30,Research scientist,Rotherham
+10,1,Michelle,6,STAR BAKER,35,Print shop administrator,"Tenby, Wales"
+10,2,Alice,1,STAR BAKER,28,Geography teacher,Essex
+10,3,Michael,6,STAR BAKER,26,Theatre manager/fitness instructor,Stratford-upon-Avon
+10,4,Steph,1,STAR BAKER,28,Shop assistant,Chester
+10,5,Steph,4,STAR BAKER,28,Shop assistant,Chester
+10,6,Steph,3,STAR BAKER,28,Shop assistant,Chester
+10,7,Henry,3,STAR BAKER,20,Student,Durham
+10,8,Steph,4,STAR BAKER,28,Shop assistant,Chester
+10,9,Alice,4,STAR BAKER,28,Geography teacher,Essex
+10,10,David,1,WINNER,36,International health adviser,Whitby
