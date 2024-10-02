@@ -3,13 +3,13 @@ title: "p8105_hw2_az2852"
 output: github_document
 ---
 
-```{r setup}
+```{r setup, message=FALSE}
 library(tidyverse)
 library(readxl)
 ```
 
 # Problem 1
-```{r}
+```{r, message=FALSE}
 transit_df = 
   read_csv("./data/nyc_transit.csv", na = c("NA", ".", ""))%>% 
   janitor::clean_names() %>% 
@@ -35,11 +35,8 @@ transit_df =
       "NO" ~ FALSE
     ))
 
-  
-print(transit_df, n = 12)
- 
 ```
-The nyc transit dataset (1,566 × 10) contains information about each entrance and exit for each subway station in NYC. Important variables include line, station name, station latitude & longitude, routes served, entry, entrance type, vending, and ADA compliance. So far, I've converted all variable names to lower-case string format, removed repeated rows, converted the original "route" variables to the same format and displayed them under a new variable called "subway_lines"; the number of subway lines running at each station is displayed under a variable called "route_count". I removed the NAs in the subway_lines column. Finally, I converted the entry and vending variables to logical.
+The resulting dataset (1,566 × 10) contains information about each entrance and exit for each subway station in NYC. Important variables include line, station name, station latitude & longitude, routes served, entry, entrance type, vending, and ADA compliance. So far, I've converted all variable names to lower-case string format, removed repeated rows, converted the original "route" variables to long format under a new variable called "subway_lines"; the number of subway lines running at each station is displayed under a variable called "route_count". I removed the NAs in the subway_lines column. Finally, I converted the entry and vending variables to logical.
 
 Now the data is tidy in the sense that you can clearly see which subway lines are running at each station. There are no repeating rows and the display is better. Converting the entry variable to logical allows us to count the number of available entrances and see which stations have available entrances.
 
@@ -48,6 +45,8 @@ According to the dataset:
 * There are `r transit_df %>% distinct(line, station_name) %>% nrow()` distinct stations.
 * `r transit_df %>% distinct(line, station_name, .keep_all = TRUE) %>% pull(ada) %>% sum()` stations are ADA compliant.
 * About 55% of stations without vending allow entrance.
+
+The code for calculation are as follows:
 ```{r}
 transit_df %>% 
   distinct(line, station_name) %>% 
@@ -70,6 +69,26 @@ no_vending_entry_df = no_vending_df %>%
 nrow(no_vending_entry_df)/nrow(no_vending_df)
 ```
 
+## How many distinct stations serve the A train? 
+```{r}
+transit_df %>% 
+  filter(subway_lines == "A") %>% 
+  distinct(line, station_name, .keep_all = TRUE) %>% 
+  nrow()
+```
+60 distinct stations serve the A train.
+
+## Of the stations that serve the A train, how many are ADA compliant?
+```{r}
+transit_df %>% 
+  filter(subway_lines == "A") %>% 
+  distinct(line, station_name, .keep_all = TRUE) %>% 
+  filter(ada == TRUE) %>% 
+  nrow()
+```
+Of the stations that serve the A train, 17 are ADA compliant.
+
+
 # Problem 2
 Read the Mr. Trashwheel dataset.
 ```{r}
@@ -85,7 +104,6 @@ mr_trashwheel_df =
         sports_balls = as.integer(sports_balls),
         year = as.numeric(year)
     ) 
-print(mr_trashwheel_df, n = 12)
 
 ```
 Read Professor Trash Wheel dataset.
@@ -97,8 +115,6 @@ prof_trashwheel_df =
         range = cell_cols("A:M")) %>% 
     janitor::clean_names() %>% 
     drop_na(dumpster)
-
-print(prof_trashwheel_df, n = 12)
 ```
 
 Read Gwynda Trash Wheel dataset.
@@ -110,32 +126,27 @@ gw_trashwheel_df =
         range = cell_cols("A:L")) %>% 
     janitor::clean_names() %>% 
     drop_na(dumpster)
-
-print(gw_trashwheel_df, n = 12)
 ```
-Now we try to combine the 3 datasets together. We observe that the 3 datasets have the same variables except that prof trashwheel lacks "sports_balls" and Gwynnda trashwheel lacks "glass_bottles" and "sports_balls". We need to add them before combining.
+Now we try to combine the 3 datasets together. We observe that the 3 datasets have the same variables except that Prof Trashwheel lacks "sports_balls" and Gwynnda Trashwheel lacks "glass_bottles" and "sports_balls". We need to add them before combining.
 ```{r}
 prof_trashwheel_tidy_df = 
   prof_trashwheel_df %>% 
   mutate(sports_balls = NA) %>% 
   select(1:which(names(prof_trashwheel_df) == "wrappers"), sports_balls, everything()) 
 
-print(prof_trashwheel_tidy_df, n = 12)
 ```
-Similarly, we add "glass_bottles" and "sports_balls" to the Gwynnda Trash Wheel dataset
+
 ```{r}
 gw_trashwheel_tidy_df = 
   gw_trashwheel_df %>% 
   mutate(glass_bottles = NA, sports_balls = NA) %>% 
   select(1:which(names(gw_trashwheel_df) == "wrappers"), sports_balls, everything()) %>% 
   select(1:which(names(gw_trashwheel_df) == "cigarette_butts"), glass_bottles, everything())
-  
-
-print(gw_trashwheel_tidy_df, n = 12)
+ 
 ```
 
 
-Now combine them.
+Now combine the datasets.
 ```{r}
 all_trashwheels_df = bind_rows(mr_trashwheel_df, prof_trashwheel_tidy_df, gw_trashwheel_tidy_df)
 ```
@@ -151,6 +162,7 @@ gw_trashwheel_tidy_df %>%
   pull(cigarette_butts) %>% 
   sum()
 ```
+
 # Problem 3
 Import and clean the bakers dataset
 ```{r}
@@ -159,28 +171,22 @@ bakers_df =
   janitor::clean_names() %>% 
   arrange(series) %>% 
   rename(baker = baker_name)
-
-print(bakers_df, n=12)
 ```
 Import and clean the bakes dataset
 ```{r}
 bakes_df = 
   read_csv("./data/gbb/bakes.csv", na = c("N/A", "UNKNOWN", "")) %>% 
   janitor::clean_names()
-
-print(bakes_df, n=12)
 ```
 Import and clean the results dataset.
 ```{r}
 results_df = 
   read_csv("./data/gbb/results.csv", skip = 2) %>% 
   janitor::clean_names()
-
-print(results_df, n=12)
 ```
 Now we want to create a big dataframe with all variables in one row: series, episode, baker_name, baker_age, baker_occupation, hometown, signature_bake, show_stopper, technical, result.
 
-For the purpose of joining the datasets, I kept the first name of the bakers. I joined the bakes dataset with the results dataset, using "baker" "episode", and "series" as the key. Then, I joined the dataset with the baker dataset. The bakes dataset only contains information up to the 8th season, so the bakes columns for the last 2 seasons are filled with NAs.
+For the purpose of joining the datasets, I kept the first name of the bakers. I joined the bakes dataset with the results dataset, using variables "baker" "episode", and "series" as the key and keeping the observations in the results dataset. Then, I joined the dataset with the baker dataset. The bakes dataset only contains information up to the 8th season, so the bakes columns for the last 2 seasons are filled with NAs.
 ```{r}
 bakers_fn_df = bakers_df %>% 
   mutate(baker = word(baker, 1))
@@ -192,8 +198,9 @@ gbb_df =
   left_join(bakers_fn_df, by = c("baker", "series")) %>% 
   write_csv("./data/gbb/gbb.csv")
 ```
-The dataset (1136x10) contains data from the 1st to 10th season of the Great British Bakeoff. Each season has 10 episodes, except the first two seasons. In each episode, contestants compete in signature challenges, technical challenges, and a showstopper. At the end of an episode the winner is crowned “Star Baker” (and winner in the last episode of a season), and a loser is eliminated. The dataset contains information about the contestants, their signature bakes and showstoppers, and the results. Each row is information about one contestant in one episode.
+The dataset (1136x10) contains data from the 1st to 10th season of the Great British Bakeoff. In each episode, contestants compete in signature challenges, technical challenges, and a showstopper. At the end of an episode the winner is crowned “Star Baker” (and winner in the last episode of a season), and a loser is eliminated. The dataset contains information about the contestants, their signature bakes and showstoppers, and the results. Each row is information about one contestant in one episode.
 
+## Create a reader-friendly table showing the star baker or winner of each episode in Seasons 5 through 10. Comment on this table – were there any predictable overall winners? Any surprises?
 ```{r}
 winner5t10_df = 
   gbb_df %>% 
@@ -202,18 +209,16 @@ winner5t10_df =
   select(-signature_bake, -show_stopper) %>% 
   write_csv("./data/gbb/winner5t10.csv")
 ```
+If we are trying to predict the overall winner based on the star bakers of each episode, we are out of luck. Surprisingly, the star baker in most episodes tends not to be the overall winner of the season. The winner tends to come from someone who is only the star baker in one or two episodes. In the most extreme case, like in season 10, the winner is someone who is never crowned star baker. In some seasons, the winner tends to be the star baker of the last few episodes.
 
-Here is compiled results of season 5-10. If we are trying to predict the overall winner based on the star bakers of each episode, we are out of luck. The contestant who is the star baker in most episodes tends not to be the overall winner. The winner tends to come from someone who is only the star baker in one or two episodes. In the most extreme case, like in season 10, the winner is someone who is never crowned star baker. In some seasons, the winner tends to be the star baker of the last few episodes.
-
-Finally, we will look at the viewers dataset.
+## Import, clean, tidy, and organize the viewership data in viewers.csv. Show the first 10 rows of this dataset. What was the average viewership in Season 1? In Season 5?
 ```{r}
 viewers_df =
   read_csv("./data/gbb/viewers.csv", na = "NA") %>% 
   janitor::clean_names()
 ```
-
-Mean viewership of season 1 is: 2.77
-Mean viewership of season 5 is: 10.0393
+* Mean viewership of season 1 is: 2.77
+* Mean viewership of season 5 is: 10.0393
 ```{r}
 select(viewers_df, series_1) %>% 
   drop_na() %>% 
